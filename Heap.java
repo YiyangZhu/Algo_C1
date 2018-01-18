@@ -1,39 +1,44 @@
 class Heap{
-    int size;
     int length;
+    int size;
     int[] array;
     int l;
     int r;
+    int temp;
     int largest;
     
     Heap(int[] a){
         array = a;
-        size = a.length;
         length = a.length;
+        size = a.length;
+    }
+    
+    void display(){
+        for(int i : array){
+            System.out.print(i+" ");
+        }
+        
+        System.out.println();
     }
     
     int left(int i){
-        return i * 2 + 1;
+        return 2*i + 1;
     }
     
     int right(int i){
-        return i * 2 + 2;
-    }
-    
-    int parent(int i){
-        return (i - 1) / 2;
+        return 2*i + 2;
     }
     
     void maxHeapify(int[] a, int i){
-        int temp;
         l = left(i);
         r = right(i);
-        if(l < length && a[l] > a[i]){
+        if(l < size && a[l] > a[i]){
             largest = l;
         } else {
             largest = i;
         }
-        if(r < length && a[r] > a[largest]){
+        
+        if(r < size && a[r] > a[i]){
             largest = r;
         }
         if(i != largest){
@@ -42,39 +47,22 @@ class Heap{
             a[largest] = temp;
             maxHeapify(a, largest);
         }
-        return;
     }
     
     void buildMaxHeap(){
-        size = array.length;
-        for(int k = array.length / 2 - 1; k >= 0; k--){
+        for(int k = length/2 - 1; k>=0;k--){
             maxHeapify(array, k);
         }
     }
     
     void heapSort(){
-        int temp = 0;
         buildMaxHeap();
-        for(int k = array.length - 1; k >= 1; k--){
-            temp = array[0];
-            array[0] = array[k];
-            array[k] = temp;
-            length--;
-            maxHeapify(array, 0);
+        for(int k = length-1; k >= 1; k--){
+            temp = array[k];
+            array[k] = array[0];
+            array[0] = temp;
+            size--;
+            maxHeapify(array,0);
         }
     }
-    
-    void displayHeap(){
-        int count = 0;
-        for(int i : array){
-            System.out.print(count+"th:"+i+"     ");
-            count++;
-        }
-    }
-    
 }
-            
-            
-            
-            
-            
