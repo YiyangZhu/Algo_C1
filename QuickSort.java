@@ -1,27 +1,30 @@
 class QuickSort{
-    public static void main(String[] args){
-        display(quickSort());
+    int[] array;
+    int length;
+    int temp;
+    
+    QuickSort(int[] a){
+        array = a;
+        length = a.length;
     }
     
-    static void display(int[] a){
-        for(int i : a){
-            System.out.print(i+" ");
+    void display(){
+        for(int i: array){
+            System.out.print(i+"  ");
         }
+        System.out.println();
     }
     
-    static int[] quickSort(){
-        int[] a = {4,1,7,9,18,7,3,7,3,3,3,2};
-        qs(a, 0, a.length - 1);
-        return a;
+    void quickSort(){
+        qs(array, 0, length - 1);
     }
     
-    static void qs(int[] a, int l, int r){
+    void qs(int[] a, int l, int r){
         if(l >= r) return;
-        int temp;
         int i = l;
         int j = l;
-        int pivot = a[l];
         int pi = l;
+        int pivot = a[pi];
         while(pi < r){
             temp = a[pi];
             a[pi] = a[pi + 1];
@@ -37,10 +40,11 @@ class QuickSort{
                 j++;
             }
         }
-        temp = a[i];
-        a[i] = a[pi];
-        a[pi] = temp;
+        temp = a[pi];
+        a[pi] = a[i];
+        a[i] = temp;
         qs(a, l, i - 1);
         qs(a, i + 1, r);
     }
 }
+            
