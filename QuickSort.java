@@ -21,30 +21,29 @@ class QuickSort{
     
     void qs(int[] a, int l, int r){
         if(l >= r) return;
-        int i = l;
+        int q = partition(a, l, r);
+        qs(a, l, q - 1);
+        qs(a, q + 1, r);
+    }
+    
+    int partition(int[] a, int l, int r){
+        int i = l - 1;
         int j = l;
-        int pi = l;
-        int pivot = a[pi];
-        while(pi < r){
-            temp = a[pi];
-            a[pi] = a[pi + 1];
-            a[pi + 1] = temp;
-            pi++;
-            if(a[pi - 1] < a[pi]){
+        while(j < r){
+            if(a[j] < a[r]){
+                i++;
                 temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
-                i++;
                 j++;
             } else {
                 j++;
             }
         }
-        temp = a[pi];
-        a[pi] = a[i];
-        a[i] = temp;
-        qs(a, l, i - 1);
-        qs(a, i + 1, r);
+        temp = a[r];
+        a[r] = a[i + 1];
+        a[i + 1] = temp;
+        return i+1;
     }
 }
             
