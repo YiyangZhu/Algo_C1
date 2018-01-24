@@ -23,26 +23,21 @@ class LinkedList{
         if(result == null){
             System.out.println("No such node: "+n.key);
             return;
-        }
-        if(result == head){
+        }   
+        if(result.prev == null && result.next == null){
+            head = null;
+        } else if(result.prev == null && result.next != null){
             head = head.next;
-            if(head == null){
-                return;
-            }
             head.prev = null;
-            return;
+        } else if(result.prev != null && result.next == null){
+            result.prev.next = null;
+        } else {
+            result.prev.next = result.next;
+            result.next.prev = result.prev;
         }
-        result.prev.next = result.next;
-        if(result.next == null){
-            return;
-        }
-        result.next.prev = result.prev;
     }
     
     void display(){
-        if(head == null){
-            System.out.print("linked list is empty!");
-        }
         LNode current = head;
         while(current != null){
             System.out.print(current.key+" ");
@@ -51,4 +46,3 @@ class LinkedList{
         System.out.println();
     }
 }
-        
